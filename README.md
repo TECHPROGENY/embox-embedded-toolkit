@@ -2,50 +2,50 @@
 
 [insert banner image here]
 
-MBOX is a desktop application designed for developers working with embedded systems. It simplifies the debugging and testing process by providing servers and clients for popular protocols such as HTTP, UDP, TCP, and MQTT, as well as an advanced serial monitor and serial plotter. The app is built using PyQt6, which is a Python binding for the Qt application development framework. PyQt6 provides a number of benefits such as multi-platform support and the ability to create responsive and intuitive user interfaces. MBOX has an easy-to-navigate user interface that allows developers to quickly and easily configure servers and clients for the protocols they need. The advanced serial monitor and serial plotter are designed to be user-friendly, with features such as real-time data visualization and automatic scaling of graphs for improved data analysis.
+MBOX is a desktop application designed for developers working with embedded systems. It simplifies the debugging and testing process by providing servers and clients for popular protocols such as HTTP, UDP, TCP, and MQTT, as well as an advanced serial monitor and serial plotter. The app is built using PyQt6, which is a Python binding for the Qt application development framework. MBOX has an easy-to-navigate user interface that allows developers to quickly and easily configure servers and clients for the protocols they need. The advanced serial monitor and serial plotter are designed to be user-friendly, with features such as real-time data visualization and automatic scaling of graphs for improved data analysis.
 
-[insert samople image here]
+[insert sample image here]
 
 # Features
 
-- **HTTP Server and Client** 
+- **HTTP Server and Client**
   - Set up an HTTP server with one click.
-  - Easy file hosting for OTA or AUdio server.
-  - Dedicated console for debuging. 
+  - Easy file hosting for an OTA or Audio server.
+  - Dedicated console for debugging.
 - **UDP/TCP Server and Client**
-  - Chnage the reponse without stoping the connection.
-  - Handle multiple connetion same time.
+  - Change the response without stopping the connection.
+  - Handle multiple connections at once.
 - **MQTT Server and Client**.
-  - Easly configure and publish MQTT server localy (requiers mosquito mqtt broker).
+  - Easily configure and publish MQTT servers locally (requires the Mosquito MQTT broker).
   - Subscibe to any topic on the go.
-- **Advanced Serial Monitor **
-  - Full fleed serial monitor with all advance control.
+- **Advanced Serial Monitor**
+  - Full fledged serial monitor with all advanced control.
   - Real time filer option.
-  - Console with regex decoding depending on arious microcontroler.
+  - Console with regex decoding depending on various microcontrollers.
 - **Serial Plotter**
-  - Arduino like serial port which can be implemented with any microcontroller framework.
-  - Live customisation for the graph.
+  - Arduino like serial plotter, which can be implemented with any microcontroller framework.
+  - Live customization for the graph.
   - Adjust speed and time.
  
-**More feature on the way**
+**More features are on the way**
 
 
 
 # Installation.
 
-Mbox tool kit is written in python3 with QT6 framework.The script requiers installation of python3.10 or higher.
+The MBOX toolkit is written in Python 3 with the QT6 framework. The script requires the installation of Python 3.10 or higher.
 
 ### Step 1.
-**Install python3 and git and mosquito**
+**Install Python 3, Git, and Mosquito.
 
 **Debian.**
  ```bash
- sudo apt install python3 git -y
+ sudo apt install python3 git mosquito -y
  ```
  **Windows.**
-Install GIT form [here](https://git-scm.com/download/win).
-Install python3 from [here](https://www.python.org/downloads/windows/)
-Install moosquito from [here](https://mosquitto.org/download/)
+Install GIT form [here] (https://git-scm.com/download/win).
+Install Python 3 from [here](https://www.python.org/downloads/windows/)
+Install Mosquito from [here] (https://mosquitto.org/download/).
 
 ### Step 2.
 Clone this repo
@@ -55,7 +55,7 @@ git clone https://github.com/TECHPROGENY/MBOX-EMBEDDED-TOOLKIT/
 ```
 
 ### Step 3.
-Run the instalation script.
+Run the installation script.
 
 ```bash
 cd MBOX-EMBEDDED-TOOLKIT
@@ -72,16 +72,16 @@ python3 mbox.py
 ```
 
 # Tutorials.
-- [MQTT Client and Server](youtube link here)
-- [HTTP Client and Server](youtube link here)
-- [TCP Client and Server](youtube link here)
-- [UDP Client and Server](youtube link here)
-- [Serial Monitor](youtube link here)
-- [Serial Plotter](youtube link here)
+- [MQTT Client and Server] (YouTube link here)
+- [HTTP Client and Server] (YouTube link here)
+- [TCP Client and Server] (YouTube link here)
+- [UDP Client and Server] (YouTube link here)
+- [Serial Monitor] (YouTube link here)
+- [Serial Plotter] (YouTube link here)
 
-## Serial ploter  C code for microcontrollers
+## Serial plotter C code for microcontrollers
 
-This code sniffet reads analog value from CHANNEL_0 and print the value using "MPLOT" keayword which is intercpeted by the mbox plotter to plot the graph.
+This code snippet reads the analog value from CHANNEL_0 and prints the value using the "MPLOT" keyword, which is intercepted by the MBOX plotter to plot the graph.
 
 ```c
 
@@ -100,9 +100,9 @@ void app_main(void)
 ```
 
 # Contribution Guidelines
-MBOX is an open source project and welcomes contributions from the community. Here are some guidelines to follow when making contributions:
+MBOX is an open source project that welcomes contributions from the community. Here are some guidelines to follow when making contributions:
 
-Fork the repository and make your changes in a new branch.
+Fork the repository and make your changes on a new branch.
 Ensure that your changes do not break existing functionality and are consistent with the goals of the project.
 Write clear commit messages and use descriptive comments to explain your changes.
 Submit a pull request with your changes.
