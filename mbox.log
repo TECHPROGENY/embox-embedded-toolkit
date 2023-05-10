@@ -1,0 +1,1 @@
+pyinstaller --onefile --windowed --add-data "files/*:." --add-binary "/home/nikhil/.local/lib/python3.10/site-packages/PyQt6/Qt6/lib/:." --hidden-import paho-mqtt --hidden-import qt_material --hidden-import requests  --hidden-import numpy my_ui.py
