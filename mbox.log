@@ -1,1 +1,1 @@
-pyinstaller --onefile --windowed --add-data "files/*:." --add-binary "/home/nikhil/.local/lib/python3.10/site-packages/PyQt6/Qt6/lib/:." --hidden-import paho-mqtt --hidden-import qt_material --hidden-import requests  --hidden-import numpy my_ui.py
+pyinstaller --onefile --windowed --exclude-module PySide6 --exclude-module PyQt5 --add-data "files/*:." --add-binary "$HOME/.local/lib/python3.10/site-packages/PyQt6/Qt6/lib/:." --hidden-import paho-mqtt --hidden-import qt_material --hidden-import requests  --hidden-import numpy embox.py
