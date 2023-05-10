@@ -1,0 +1,6 @@
+requests
+PyQt6
+pyqtgraph
+numpy
+paho-mqtt
+qt_material
