@@ -1363,7 +1363,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     
 
-    app.setWindowIcon(QIcon(resource_path('data-server.png')))
+    app.setWindowIcon(QIcon(resource_path('icon.ico')))
     palette = app.palette()
     
     window = MainWindow()
