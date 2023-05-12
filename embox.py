@@ -31,10 +31,17 @@ class serial_PopupWindow(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Settings")
+        self.combox_stylesheet ="""
+        QComboBox {
+            color: cyan;
+        }
+        """
 
 
         self.serial_parity_combo = QComboBox()
         self.serial_parity_combo.addItems(['NONE', 'EVEN', 'ODD', 'SPACE','MARK'])
+        self.serial_parity_combo.setStyleSheet(self.combox_stylesheet)
+        self.serial_parity_combo.setMinimumWidth(150)
 
         parity_layout = QHBoxLayout()
         parity_label =QLabel("Parity")
@@ -44,6 +51,8 @@ class serial_PopupWindow(QDialog):
 
         self.serial_stopbits_combo = QComboBox()
         self.serial_stopbits_combo.addItems(['1','1.5', '2'])
+        self.serial_stopbits_combo.setStyleSheet(self.combox_stylesheet)
+        self.serial_stopbits_combo.setMinimumWidth(150)
 
         stopbits_layout = QHBoxLayout()
         stopbits_label =QLabel("Stop bits")
@@ -53,6 +62,8 @@ class serial_PopupWindow(QDialog):
 
         self.serial_bytesize_combo = QComboBox()
         self.serial_bytesize_combo.addItems(['5', '6', '7', '8'])
+        self.serial_bytesize_combo.setStyleSheet(self.combox_stylesheet)
+        self.serial_bytesize_combo.setMinimumWidth(150)
 
         bytesize_layout = QHBoxLayout()
         bytesize_label = QLabel("Byte size")
@@ -102,6 +113,18 @@ class MainWindow(QMainWindow):
         try:
             self.central_widget = QWidget()
             self.setCentralWidget(self.central_widget)
+
+            self.qline_stylesheet = """
+                QLineEdit {
+                    color: cyan;
+                }
+            """
+
+            self.combox_stylesheet ="""
+                QComboBox {
+                    color: cyan;
+                }
+                """
 
             # Create a vertical layout for the main window
             self.main_layout = QHBoxLayout()
@@ -199,13 +222,17 @@ class MainWindow(QMainWindow):
 
             # Create the input fields for the form
             self.server_type_combo = QComboBox()
+            
             self.server_type_combo.addItems(["--Select Server--","HTTP", "UDP", "TCP","MQTT"])
             self.server_type_combo.setCurrentIndex(0)
             self.server_type_combo.currentIndexChanged.connect(self.server_combo_box_changed)
+            self.server_type_combo.setStyleSheet(self.combox_stylesheet)
+            
             # self.server_type_combo.currentIndexChanged.connect(self.handle_server_type_change)
 
             self.server_port_input = QLineEdit()
             self.server_port_input.setPlaceholderText("Enter Port Number")
+            self.server_port_input.setStyleSheet(self.qline_stylesheet)
 
             
 
@@ -218,6 +245,7 @@ class MainWindow(QMainWindow):
             self.server_ip_input = QLineEdit()
             self.server_ip_input.setPlaceholderText("Enter ip address")
             self.server_ip_input.setText("127.0.0.1")
+            self.server_ip_input.setStyleSheet(self.qline_stylesheet)
 
             self.server_address_bar = QHBoxLayout()
             self.server_address_bar.addWidget(self.server_ip_label)
@@ -229,6 +257,7 @@ class MainWindow(QMainWindow):
             self.server_send_data = QLineEdit()
             self.server_send_data.setPlaceholderText("Enter server response")
             self.server_send_data.returnPressed.connect(self.server_send_data_retuened)
+            self.server_send_data.setStyleSheet(self.qline_stylesheet)
 
 
             server_port_regex = QRegularExpression("^[0-9]{1,5}$")
@@ -587,6 +616,7 @@ class MainWindow(QMainWindow):
             self.serial_orgnise = QHBoxLayout()
             self.serial_form_widget.setLayout(self.serial_form_layout)
             self.serial_port_combo = QComboBox()
+            self.serial_port_combo.setStyleSheet(self.combox_stylesheet)
 
             serialPortInfos = QtSerialPort.QSerialPortInfo.availablePorts()
             serial_ports = [p.portName() for p in serialPortInfos]
@@ -596,10 +626,12 @@ class MainWindow(QMainWindow):
             self.serial_baudrate_combo = QComboBox()
             self.serial_baudrate_combo.addItems(["9600", "19200", "38400", "57600", "115200"])
             self.serial_port_combo.setCurrentIndex(0)
+            self.serial_baudrate_combo.setStyleSheet(self.combox_stylesheet)
 
             self.lineending_combobox = QComboBox()
             self.lineending_combobox.addItems(['NONE', 'NL', 'CR', 'NL & CR'])
             self.lineending_combobox.currentIndexChanged.connect(self.handle_lineending_change)
+            self.lineending_combobox.setStyleSheet(self.combox_stylesheet)
 
 
             self.serial_connect_button = QPushButton("Connect")
@@ -622,6 +654,7 @@ class MainWindow(QMainWindow):
             # Create a QLineEdit widget for entering filter serial_pattern
             self.serial_filter_pattern = QLineEdit()
             self.serial_filter_pattern.setPlaceholderText('Enter filter serial_pattern')
+            self.serial_filter_pattern.setStyleSheet(self.qline_stylesheet)
 
             # self.filter_layout = QHBoxLayout()
             # self.filter_layout.addWidget(self.serial_filter_pattern)
@@ -633,6 +666,7 @@ class MainWindow(QMainWindow):
 
             self.serial_send_input = QLineEdit()
             self.serial_send_input.returnPressed.connect(self.serial_send_data)
+            self.serial_send_input.setStyleSheet(self.qline_stylesheet)
             
             self.serial_send_button = QPushButton("Send")
             self.serial_send_button.clicked.connect(self.serial_send_data)
@@ -861,7 +895,9 @@ class MainWindow(QMainWindow):
         # Create combo boxes for line colors and update interval
         self.serial_ploter_color_combo = QComboBox()
         self.serial_ploter_color_combo.addItems(['red', 'green', 'blue', 'black'])
+        self.serial_ploter_color_combo.setStyleSheet(self.combox_stylesheet)
         self.serial_ploter_time_edit = QLineEdit()
+        self.serial_ploter_time_edit.setStyleSheet(self.qline_stylesheet)
         self.serial_ploter_time_edit.setPlaceholderText("Enter time delay in (ms)")
         self.serial_ploter_time_edit.setValidator(QIntValidator())
 
@@ -989,13 +1025,16 @@ class MainWindow(QMainWindow):
             self.client_protocol_combobox.addItem('TCP')
             self.client_protocol_combobox.addItem('MQTT')
             self.client_protocol_combobox.setMinimumWidth(150)
+            self.client_protocol_combobox.setStyleSheet(self.combox_stylesheet)
             self.client_protocol_combobox.activated.connect(self.on_client_combo_box_activated)
 
 
             self.client_ip_edit = QLineEdit()
+            self.client_ip_edit.setStyleSheet(self.qline_stylesheet)
             self.client_ip_edit.setPlaceholderText("IP Address")
             self.client_port_edit = QLineEdit()
             self.client_port_edit.setPlaceholderText("PORT")
+            self.client_port_edit.setStyleSheet(self.qline_stylesheet)
 
             client_ip_regex = QRegularExpression("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
             client_port_regex = QRegularExpression("^[0-9]{1,5}$")
@@ -1012,6 +1051,7 @@ class MainWindow(QMainWindow):
 
             self.client_send_edit = QLineEdit()
             self.client_send_edit.setDisabled(True)
+            self.client_send_edit.setStyleSheet(self.qline_stylesheet)
 
             self.client_send_button = QPushButton('Send')
             self.client_send_button.clicked.connect(self.client_send_data)
