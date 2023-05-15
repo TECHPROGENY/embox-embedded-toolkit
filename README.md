@@ -4,7 +4,7 @@
 
 EMBOX is a desktop application designed for developers working with embedded systems. It simplifies the debugging and testing process by providing servers and clients for popular protocols such as HTTP, UDP, TCP, and MQTT, as well as an advanced serial monitor and serial plotter. The app is built using PyQt6, which is a Python binding for the Qt application development framework. EMBOX has an easy-to-navigate user interface that allows developers to quickly and easily configure servers and clients for the protocols they need. The advanced serial monitor and serial plotter are designed to be user-friendly, with features such as real-time data visualization, and automatic scaling of graphs for improved data analysis.
 
-![home page](https://github.com/TECHPROGENY/embox-embedded-toolkit/blob/main/files/home.png)
+![home page](https://github.com/TECHPROGENY/embox-embedded-toolkit/blob/main/files/start-up.png)
 ![serial plotter](https://github.com/TECHPROGENY/embox-embedded-toolkit/blob/main/files/plotter.png)
 
 # Features
