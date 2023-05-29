@@ -94,12 +94,11 @@ python3 embox.py
 ```
 
 # Tutorials.
-- [MQTT Client and Server] (YouTube link here)
-- [HTTP Client and Server] (YouTube link here)
-- [TCP Client and Server] (YouTube link here)
-- [UDP Client and Server] (YouTube link here)
-- [Serial Monitor] (YouTube link here)
-- [Serial Plotter] (YouTube link here)
+- [OTA server example](https://youtu.be/R-KDr5iDOCk)
+- [MQTT Client and Server] (Comming soon)
+- [TCP Client and Server] (Comming soon)
+- [Serial Monitor] (Comming soon)
+- [Serial Plotter] (Comming soon)
 
 ## Serial plotter C code for microcontrollers
 
