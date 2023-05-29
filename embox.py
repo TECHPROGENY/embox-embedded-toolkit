@@ -502,6 +502,7 @@ class MainWindow(QMainWindow):
                         self.server_port_input.setDisabled(True)
                         self.server_send_data.setDisabled(True)
                         self.server_console.append(f"{self.server_type_combo.currentText()} Server created on {self.server_ip_input.text()}:{self.server_port_input.text()}")
+                        self.server_checkbox.setDisabled(True)
                         return
                     self.server_console.append(f"Failed to create {self.server_type_combo.currentText()} Server on {self.server_ip_input.text()}:{self.server_port_input.text()}")
 
@@ -545,6 +546,7 @@ class MainWindow(QMainWindow):
                         self.server_console.append("enter topic:data on the response filed above and press enter to publish")
                         self.create_server_button.setText("Stop Server")
                         self.isSERVERstarted = True
+                    self.server_checkbox.setDisabled(True)
 
 
                 else:
@@ -560,6 +562,7 @@ class MainWindow(QMainWindow):
                     self.server_port_input.setDisabled(False)
                     self.server_send_data.setDisabled(False)
                     self.server_http_process = None
+                    self.server_checkbox.setDisabled(False)
                 elif self.server_udp_socket:
                     self.server_udp_socket.deleteLater()
                     self.server_type_combo.setDisabled(False)
@@ -584,6 +587,7 @@ class MainWindow(QMainWindow):
                     self.server_ip_input.setDisabled(True)
                     self.server_port_input.setDisabled(False)
                     self.server_send_data.setDisabled(True)
+                    self.server_checkbox.setDisabled(False)
                 else:
                     return
                 self.isSERVERstarted = False
