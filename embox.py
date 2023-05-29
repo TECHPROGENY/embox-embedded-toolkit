@@ -389,6 +389,7 @@ class MainWindow(QMainWindow):
             self.server_http_process.readyReadStandardOutput.connect(self.http_handle_output)
             self.server_http_process.finished.connect(self.http_process_finished)
             self.server_http_process.start("python3", [ "-m", "http.server", self.server_port_input.text(), "--bind", self.server_ip_input.text()])
+            
             self.create_server_button.setText("Stop Server")
             self.isSERVERstarted = True
         except Exception as e:
