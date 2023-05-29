@@ -1,0 +1,6 @@
+Package: embox
+Version: 0.1
+Maintainer: Nikhil Robinson
+Architecture: all
+Depends: mosquitto
+Description: embox is an embedded toolkit designed to streamline embedded development process.

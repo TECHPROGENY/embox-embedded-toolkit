@@ -1,1 +1,70 @@
-pyinstaller --onefile --windowed --exclude-module PySide6 --exclude-module PyQt5 --add-data "files/*:." --hidden-import paho-mqtt --hidden-import qt_material --hidden-import requests  --hidden-import numpy embox.py
+pyinstaller --onefile --windowed --exclude-module PySide6 --exclude-module PyQt5 --add-data "files/*:." --add-binary "$HOME/.local/lib/python3.10/site-packages/PyQt6/Qt6/lib/:." --hidden-import paho-mqtt --hidden-import qt_material --hidden-import requests  --hidden-import numpy embox.py2023-05-30 00:15:55,220 - root - ERROR - 'MainWindow' object has no attribute 'client_form_widget'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 191, in __init__
+    self.stacked_widget.addWidget(self.client_form_widget)
+AttributeError: 'MainWindow' object has no attribute 'client_form_widget'
+2023-05-30 00:30:16,528 - root - ERROR - 'MainWindow' object has no attribute 'checkbox_state_changed'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 233, in serverConf
+    self.server_checkbox.stateChanged.connect(self.checkbox_state_changed)
+AttributeError: 'MainWindow' object has no attribute 'checkbox_state_changed'
+2023-05-30 00:30:24,317 - root - ERROR - 'MainWindow' object has no attribute 'server_http_process'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 1391, in closeEvent
+    if self.server_http_process:
+AttributeError: 'MainWindow' object has no attribute 'server_http_process'
+2023-05-30 00:31:14,802 - root - ERROR - 'MainWindow' object has no attribute 'checkbox_state_changed'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 233, in serverConf
+    self.server_checkbox.stateChanged.connect(self.checkbox_state_changed)
+AttributeError: 'MainWindow' object has no attribute 'checkbox_state_changed'
+2023-05-30 00:31:16,688 - root - ERROR - 'MainWindow' object has no attribute 'server_console'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 565, in on_serverButton_clicked
+    server_log_handler = QTextEditHandler(self.server_console)
+AttributeError: 'MainWindow' object has no attribute 'server_console'
+2023-05-30 00:31:17,921 - root - ERROR - 'MainWindow' object has no attribute 'server_console'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 565, in on_serverButton_clicked
+    server_log_handler = QTextEditHandler(self.server_console)
+AttributeError: 'MainWindow' object has no attribute 'server_console'
+2023-05-30 00:31:19,505 - root - ERROR - 'MainWindow' object has no attribute 'server_console'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 565, in on_serverButton_clicked
+    server_log_handler = QTextEditHandler(self.server_console)
+AttributeError: 'MainWindow' object has no attribute 'server_console'
+2023-05-30 00:31:38,894 - root - ERROR - 'MainWindow' object has no attribute 'server_http_process'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 1391, in closeEvent
+    if self.server_http_process:
+AttributeError: 'MainWindow' object has no attribute 'server_http_process'
+2023-05-30 00:33:52,071 - root - ERROR - 'MainWindow' object has no attribute 'checkbox_state_changed'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 233, in serverConf
+    self.server_checkbox.stateChanged.connect(self.checkbox_state_changed)
+AttributeError: 'MainWindow' object has no attribute 'checkbox_state_changed'
+2023-05-30 00:33:54,442 - root - ERROR - 'MainWindow' object has no attribute 'server_console'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 565, in on_serverButton_clicked
+    server_log_handler = QTextEditHandler(self.server_console)
+AttributeError: 'MainWindow' object has no attribute 'server_console'
+2023-05-30 00:33:57,771 - root - ERROR - 'MainWindow' object has no attribute 'server_console'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 565, in on_serverButton_clicked
+    server_log_handler = QTextEditHandler(self.server_console)
+AttributeError: 'MainWindow' object has no attribute 'server_console'
+2023-05-30 00:34:13,481 - root - ERROR - 'MainWindow' object has no attribute 'server_http_process'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 1391, in closeEvent
+    if self.server_http_process:
+AttributeError: 'MainWindow' object has no attribute 'server_http_process'
+2023-05-30 00:58:20,776 - root - ERROR - 'MainWindow' object has no attribute 'use_mosquito'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 534, in create_server
+    if self.use_mosquito:
+AttributeError: 'MainWindow' object has no attribute 'use_mosquito'
+2023-05-30 01:12:53,916 - root - ERROR - 'NoneType' object has no attribute 'terminate'
+Traceback (most recent call last):
+  File "/home/nikhil/Desktop/Nikhil/embox-embedded-toolkit/embox.py", line 580, in create_server
+    self.broker_process.terminate()
+AttributeError: 'NoneType' object has no attribute 'terminate'

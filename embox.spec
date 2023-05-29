@@ -7,7 +7,7 @@ block_cipher = None
 a = Analysis(
     ['embox.py'],
     pathex=[],
-    binaries=[],
+    binaries=[('/home/nikhil/.local/lib/python3.10/site-packages/PyQt6/Qt6/lib/', '.')],
     datas=[('files/*', '.')],
     hiddenimports=['paho-mqtt', 'qt_material', 'requests', 'numpy'],
     hookspath=[],

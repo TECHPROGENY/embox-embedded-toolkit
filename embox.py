@@ -220,6 +220,8 @@ class MainWindow(QMainWindow):
             self.server_form_layout = QFormLayout()
             self.server_form_widget.setLayout(self.server_form_layout)
 
+            self.use_mosquito = False
+
             # Create the input fields for the form
             self.server_type_combo = QComboBox()
             
@@ -227,6 +229,17 @@ class MainWindow(QMainWindow):
             self.server_type_combo.setCurrentIndex(0)
             self.server_type_combo.currentIndexChanged.connect(self.server_combo_box_changed)
             self.server_type_combo.setStyleSheet(self.combox_stylesheet)
+
+            self.server_checkbox = QCheckBox(self)
+            
+            self.server_checkbox.setChecked(False)  # Set initial checked state
+            self.server_checkbox.stateChanged.connect(self.checkbox_state_changed)
+            self.server_checkbox.setText("None")
+            self.server_checkbox.setDisabled(True)
+
+            self.server_select_bar = QHBoxLayout()
+            self.server_select_bar.addWidget(self.server_type_combo)
+            self.server_select_bar.addWidget(self.server_checkbox)
             
             # self.server_type_combo.currentIndexChanged.connect(self.handle_server_type_change)
 
@@ -274,7 +287,7 @@ class MainWindow(QMainWindow):
             self.create_server_button.clicked.connect(self.create_server)
 
             # Add the input fields to the form layout
-            self.server_form_layout.addRow(self.server_type_combo)
+            self.server_form_layout.addRow(self.server_select_bar)
             self.server_form_layout.addRow(self.server_address_bar)
             self.server_form_layout.addRow(self.server_send_data)
             self.server_form_layout.addRow(self.create_server_button)
@@ -300,34 +313,62 @@ class MainWindow(QMainWindow):
             self.isSERVERstarted = False
         except Exception as e:
             logging.exception(e)
+    def checkbox_state_changed(self, state):
+        if state == 2:  # 2 represents the checked state
+            print("Checkbox is checked.")
+            if self.server_selected_option == "MQTT":
+                self.use_mosquito = True
+                self.server_ip_input.setDisabled(True)
+            elif self.server_selected_option == "HTTP":
+                self.use_https = True
+            else:
+                self.use_mosquito = False
+                self.use_https = False
 
+        else:
+            if self.server_selected_option == "MQTT":
+                self.use_mosquito = False
+                self.server_ip_input.setDisabled(False)
+            elif self.server_selected_option == "HTTP":
+                self.use_https = False
+            else:
+                self.use_mosquito = True
+                self.use_https = True
     def server_combo_box_changed(self):
         try:
-            selected_option = self.server_type_combo.currentText()
-            if selected_option == "MQTT":
+            self.server_selected_option = self.server_type_combo.currentText()
+            if self.server_selected_option == "MQTT":
                 self.server_ip_input.setText("127.0.0.1")
-                self.server_ip_input.setDisabled(True)
+                self.server_checkbox.setText("Use Mosquitto")
+                self.server_checkbox.setDisabled(False)
+                self.server_ip_input.setDisabled(False)
                 self.server_port_input.setDisabled(False)
                 self.server_send_data.setDisabled(True)
                 self.create_server_button.setDisabled(False)
                 self.server_send_data.setPlaceholderText("Enter topic and data seprated by ':' eg: topic:data")
-            elif selected_option == "HTTP":
+            elif self.server_selected_option == "HTTP":
                 self.server_ip_input.setEnabled(True)
                 self.server_port_input.setEnabled(True)
                 self.server_send_data.setEnabled(True)
                 self.create_server_button.setEnabled(True)
+                self.server_checkbox.setText("HTTPS")
+                self.server_checkbox.setDisabled(False)
                 self.server_send_data.setPlaceholderText("Enter path for files (.html,.js)")
-            elif selected_option == "UDP" or selected_option == "TCP":
+            elif self.server_selected_option == "UDP" or self.server_selected_option == "TCP":
                 self.server_ip_input.setEnabled(True)
                 self.server_port_input.setEnabled(True)
                 self.server_send_data.setEnabled(True)
                 self.create_server_button.setEnabled(True)
+                self.server_checkbox.setText("None")
+                self.server_checkbox.setDisabled(True)
                 self.server_send_data.setPlaceholderText("Enter server response")
             else:
                 self.server_ip_input.setEnabled(False)
                 self.server_port_input.setEnabled(False)
                 self.server_send_data.setEnabled(False)
                 self.create_server_button.setEnabled(False)
+                self.server_checkbox.setText("None")
+                self.server_checkbox.setDisabled(True)
         except Exception as e:
             logging.exception(e)
 
@@ -430,9 +471,10 @@ class MainWindow(QMainWindow):
     def server_send_data_retuened(self):
         if self.server_type_combo.currentText() == "MQTT" and self.isSERVERstarted:
             print("Hi mqtt")
-            if self.broker_process.state() != QProcess.ProcessState.Running:
-                self.server_console.append("Broker is not running please start the server")
-                return
+            if self.use_mosquito:
+                if self.broker_process.state() != QProcess.ProcessState.Running:
+                    self.server_console.append("Broker is not running please start the server")
+                    return
             if ":" not in self.server_send_data.text():
                 self.server_console.append("Wrong data type secified it should be in the format topic:data")
                 return
@@ -492,11 +534,18 @@ class MainWindow(QMainWindow):
                     self.server_ip_input.setDisabled(True)
                     self.server_port_input.setDisabled(True)
                     self.server_send_data.setDisabled(True)
-                    self.broker_process = QProcess(self)
-                    self.broker_process.setProcessChannelMode(QProcess.ProcessChannelMode.MergedChannels)
-                    self.broker_process.readyReadStandardOutput.connect(self.broker_process_output)
-                    self.broker_process.finished.connect(self.broker_process_finished)
-                    self.broker_process.start("mosquitto", [ "-p", self.server_port_input.text()])
+                    if self.use_mosquito:
+                        self.broker_process = QProcess(self)
+                        self.broker_process.setProcessChannelMode(QProcess.ProcessChannelMode.MergedChannels)
+                        self.broker_process.readyReadStandardOutput.connect(self.broker_process_output)
+                        self.broker_process.finished.connect(self.broker_process_finished)
+                        self.broker_process.start("mosquitto", [ "-p", self.server_port_input.text()])
+                    else:
+                        self.server_send_data.setDisabled(False)
+                        self.server_console.append("enter topic:data on the response filed above and press enter to publish")
+                        self.create_server_button.setText("Stop Server")
+                        self.isSERVERstarted = True
+
 
                 else:
                     self.server_console.append("Please select a server type")
@@ -526,10 +575,11 @@ class MainWindow(QMainWindow):
                     self.server_send_data.setDisabled(True)
                     self.tcp_server = None
                     
-                elif self.broker_process:
+                elif self.broker_process or not self.use_mosquito:
                     # self.mqtt_server_client.disconnect()
-                    self.broker_process.terminate()
-                    self.broker_process.waitForFinished()
+                    if self.broker_process:
+                        self.broker_process.terminate()
+                        self.broker_process.waitForFinished()
                     self.server_type_combo.setDisabled(False)
                     self.server_ip_input.setDisabled(True)
                     self.server_port_input.setDisabled(False)
@@ -544,9 +594,11 @@ class MainWindow(QMainWindow):
             logging.exception(e)
 
     def _broker_started(self):
-        
         self.mqtt_server_client = mqtt.Client()
-        self.mqtt_server_client.connect("127.0.0.1",int(self.server_port_input.text()))
+        if self.use_mosquito:
+            self.mqtt_server_client.connect("127.0.0.1",int(self.server_port_input.text()))
+        else:
+             self.mqtt_server_client.connect(self.server_ip_input.text(),int(self.server_port_input.text()))
         self.isSERVERstarted = True
         
 
